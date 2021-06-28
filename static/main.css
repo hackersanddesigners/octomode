@@ -1,0 +1,16 @@
+body{
+	background-color: lightgreen;
+	margin: 1vh 5vw 2vh 5vw;
+}
+div#nav{
+	position: absolute;
+	top:1em;
+	right: 1em;
+}
+iframe{
+	width: 90vw;
+	height: 88vh;
+}
+input{
+	min-width: 300px;
+}
