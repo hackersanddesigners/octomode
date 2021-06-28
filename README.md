@@ -20,4 +20,11 @@ work-in-process, collaborative editing space for PDF making using pads (<> Ether
 
 `python3 start.py`
 
-Then: configure the webserver to listen to the port of the flask application, for example with a subdomain.
+Then: 
+
+* init etherpump (`etherpump init`)
+* configure the webserver to listen to the port of the flask application, for example with a subdomain (`cp /etc/nginx/sites-enabled/previousexample.vvvvvvaria.org.conf /etc/nginx/sites-enabled/new.vvvvvvaria.org.conf`)
+* expand the current https certificate for this subdomain, using Letsencrypt 
+* restart nginx (`sudo service reload nginx`)
+* keep the flask application running in the background: add the new instance of pad2pdf to supervisor (`cp /etc/supervisor/conf.d/previousexample.conf new.conf`)
+* restart supervisor (`sudo service reload supervisor`)
