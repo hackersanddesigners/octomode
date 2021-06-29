@@ -1,10 +1,6 @@
 # pad2pdf 
 
-work-in-progressssss
-
-
-work-in-process, collaborative editing space for PDF making using pads (<> Ethertoff project http://osp.kitchen/tools/ethertoff/ <> JupyterPi https://git.xpub.nl/XPUB/jupyterpi)
-
+work-in-process, collaborative editing space for PDF making using pads (<> Ethertoff http://osp.kitchen/tools/ethertoff/ <> Etherbox https://networksofonesown.constantvzw.org/ <> JupyterPi https://git.xpub.nl/XPUB/jupyterpi)
 
 ## Install a new instance on the server
 
