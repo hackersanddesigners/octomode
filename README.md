@@ -1,6 +1,6 @@
 # pad2pdf 
 
-work-in-process, collaborative editing space for PDF making using pads (<> Ethertoff http://osp.kitchen/tools/ethertoff/ <> Etherbox https://networksofonesown.constantvzw.org/ <> JupyterPi https://git.xpub.nl/XPUB/jupyterpi)
+work-in-process, collaborative editing space for PDF making using pads 
 
 ## Install a new instance on the server
 
@@ -31,4 +31,7 @@ go to the URL in the browser!
 
 # Refs
 
-http://typotheque.le75.be/
+* Ethertoff http://osp.kitchen/tools/ethertoff/ by OSP
+* Etherbox https://networksofonesown.constantvzw.org/ by Michael Murtaugh/Constant
+* Pad2Print https://gitlab.com/Luuse/pad2print by Luuse
+* JupyterPi https://git.xpub.nl/XPUB/jupyterpi by Michael Murtaugh/XPUB
