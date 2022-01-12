@@ -29,5 +29,6 @@ Then:
 
 * Ethertoff http://osp.kitchen/tools/ethertoff/ by OSP
 * Etherbox https://networksofonesown.constantvzw.org/ by Michael Murtaugh/Constant
+* Etherdump https://gitlab.constantvzw.org/aa/etherdump by Michael Murtaugh/Constant
 * Pad2Print https://gitlab.com/Luuse/pad2print by Luuse
 * JupyterPi https://git.xpub.nl/XPUB/jupyterpi by Michael Murtaugh/XPUB
