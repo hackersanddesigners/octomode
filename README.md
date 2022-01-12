@@ -2,7 +2,7 @@
 
 *work-in-process*
 
-Octomode is a collective editing space for PDF making, using Etherpad, Etherdump, Paged.js and Flask. 
+Octomode is a collective editing space for PDF making, using Etherpad, Paged.js and Flask. 
 
 ## Install octomode
 
