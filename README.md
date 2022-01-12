@@ -1,6 +1,6 @@
 # Octomode 
 
-work-in-process
+*work-in-process*
 
 Octomode is a collective editing space for PDF making, using Etherpad, Etherdump, Paged.js and Flask. 
 
@@ -29,5 +29,6 @@ Then:
 
 * Ethertoff http://osp.kitchen/tools/ethertoff/ by OSP
 * Etherbox https://networksofonesown.constantvzw.org/ by Michael Murtaugh/Constant
+* Etherdump https://gitlab.constantvzw.org/aa/etherdump by Michael Murtaugh/Constant
 * Pad2Print https://gitlab.com/Luuse/pad2print by Luuse
 * JupyterPi https://git.xpub.nl/XPUB/jupyterpi by Michael Murtaugh/XPUB
