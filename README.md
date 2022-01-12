@@ -1,33 +1,29 @@
-# pad2pdf 
+# Octomode 
 
-work-in-process, collaborative editing space for PDF making using pads 
+work-in-process
 
-## Install a new instance on the server
+Octomode is a collective editing space for PDF making, using Etherpad, Etherdump, Paged.js and Flask. 
 
-`git clone https://git.vvvvvvaria.org/mb/pad2pdf.git`
+## Install octomode
 
-`cd pad2pdf`
+`git clone https://git.vvvvvvaria.org/mb/octomode.git`
 
-`python3 -m venv venvfolder`
+`cd octomode`
 
-`source ./venvfolder/bin/activate`
+`python3 -m venv .venv`
+
+`source .venv/bin/activate`
 
 `pip install -r requirements.txt`
-
-update the pad links in the templates, see `templates/`
 
 Then: 
 
 * init etherpump (`etherpump init`)
-* configure the webserver to listen to the port of the flask application, for example with a subdomain (`cp /etc/nginx/sites-enabled/previousexample.vvvvvvaria.org.conf /etc/nginx/sites-enabled/new.vvvvvvaria.org.conf`)
-* expand the current https certificate for this subdomain, using Letsencrypt 
+* configure the webserver to listen to the port of the flask application, for example with a subdomain
+* expand the current https certificate for this subdomain
 * restart nginx (`sudo service reload nginx`)
-* to keep the flask application running in the background: add the new instance of pad2pdf to supervisor (`cp /etc/supervisor/conf.d/previousexample.conf new.conf`)
+* to keep the flask application running in the background: add a new config to supervisor (`cp /etc/supervisor/conf.d/previousexample.conf new.conf`)
 * restart supervisor (`sudo service reload supervisor`)
-
-and then:
-
-go to the URL in the browser!
 
 # Refs
 
