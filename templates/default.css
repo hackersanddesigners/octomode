@@ -1,0 +1,10 @@
+@page{
+	size: A5;
+}
+@page:first{
+	background-color: pink;
+}
+section#cover,
+section#TOC{
+	page-break-after: always;
+}

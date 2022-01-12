@@ -1,0 +1,30 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<iframe id="pdf" name="pdf" src="/{{ name }}/pagedjs.html"></iframe>
+{% endblock %}
+
+{% block footer %}
+<script>
+function printPage(){
+      window.frames["pdf"].focus();
+      window.frames["pdf"].print();
+}
+
+window.addEventListener('load', function () {
+
+      // Load the main.css again, to load the stylesheet for the nav
+      var cssLink = document.createElement('link');
+      cssLink.rel = 'stylesheet';
+      cssLink.href = '/static/main.css';
+      var head = document.getElementsByTagName('head')[0];
+      head.insertBefore(cssLink, head.firstChild);
+
+      // Insert the SAVE button
+      const nav = document.getElementById('buttons');
+      const save = '<a href="#"><button id="save" onClick="printPage()">save</button></a>';
+      nav.innerHTML = nav.innerHTML + save;
+
+})
+</script>
+{% endblock %}

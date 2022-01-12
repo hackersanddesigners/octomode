@@ -2,20 +2,42 @@
 <html lang='en'>
 <head>
 	<meta charset="utf-8" />
-	<title>DSN documentation</title>
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css')}}">
+	<title>{{ name }}</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+	<!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+	<!-- <script src="{{ url_for('static', filename='logger.js') }}"></script> -->
+	{% block head %}
+	{% endblock %}
 </head>
 <body>
-	<h1>DSN documentation</h1>
-	<div id="nav">
-		<a href="/">pad</a>: <input type="text" name="pad" value="https://pad.vvvvvvaria.org/DSN.md">,
-		<a href="/html/">html</a>,
-		<a href="/pagedjs/">pagedjs</a>,
-		<a href="/stylesheet/">stylesheet</a>: <input type="text" name="pad" value="https://pad.vvvvvvaria.org/DSN.css">,
-	</div>
 	<div id="wrapper">
 		{% block content %}
 		{% endblock %}
-	</div>	
+	</div>
 </body>
+<script>
+window.addEventListener('load', function () {
+
+	// Insert the nav buttons, after the page is loaded
+	const nav = document.createElement('div');
+		  nav.id = 'nav';
+	const name = '{{ name }}';
+	const backlog = '<a href="/${ name }/backlog/"><button>backlog</button></a>';
+	
+	nav.innerHTML = `
+		<h1>${ name } <em class="octomode">in octomode</em></h1>
+		<div id="buttons">
+			<a href="/${ name }/pad/"><button>pad</button></a>: <input type="text" name="pad" value="https://pad.vvvvvvaria.org/${ name }.md">
+			<a href="/${ name }/stylesheet/"><button>stylesheet</button></a>: <input type="text" name="pad" value="https://pad.vvvvvvaria.org/${ name }.css">
+			<a href="/${ name }/template/"><button>template</button></a>: <input type="text" name="pad" value="https://pad.vvvvvvaria.org/${ name }.template">
+			<!-- <a href="/${ name }/html/"><button>html</button></a> -->
+			<a href="/${ name }/pdf/"><button>pdf</button></a>
+		</div>`;
+
+	document.body.insertBefore(nav, document.body.firstChild);
+
+})
+</script>
+{% block footer %}
+{% endblock %}
 </html>
