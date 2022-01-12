@@ -10,7 +10,7 @@ Octomode is a collective editing space for PDF making, using Etherpad, Paged.js 
 
 `make run` (runs the Flask application)
 
-Open the application at `http://localhost:5001`.
+Open the application at <http://localhost:5001>.
 
 ## Use octomode on a server
 
