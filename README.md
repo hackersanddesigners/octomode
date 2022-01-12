@@ -4,21 +4,16 @@
 
 Octomode is a collective editing space for PDF making, using Etherpad, Paged.js and Flask. 
 
-## Install octomode
+## Install octomode locally
 
-`git clone https://git.vvvvvvaria.org/mb/octomode.git`
+`make setup` (sets up a virtual environment and install the requirements)
 
-`cd octomode`
+`make run` (runs the Flask application)
 
-`python3 -m venv .venv`
+Open the application at `http://localhost:5001`.
 
-`source .venv/bin/activate`
+## Install octomode on a server
 
-`pip install -r requirements.txt`
-
-Then: 
-
-* init etherpump (`etherpump init`)
 * configure the webserver to listen to the port of the flask application, for example with a subdomain
 * expand the current https certificate for this subdomain
 * restart nginx (`sudo service reload nginx`)
