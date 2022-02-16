@@ -67,20 +67,12 @@ def create_pad_on_first_run(name, ext):
 		api_call = 'createPad'
 		response = json.load(urlopen(f"{ APP.config['PAD_API_URL'] }{ api_call }", data=urlencode(arguments).encode()))
 
-def update_pad_contents(name):
+def update_pad_contents(name, ext):
 	# download the md pad + stylesheet + template pad
-	md_pad = f'{ name }.md'
-	css_pad = f'{ name }.css'
-	template_pad = f'{ name }.template'
-	md = get_pad_content(md_pad)
-	css = get_pad_content(css_pad)
-	template = get_pad_content(template_pad)
-	# !!! this breaks the whole idea that this application can be shared by multiple projects at the same time
-	# !!! but py_pandoc needs to run with files........ hmmm
-	with open('templates/pandoc-template.html', 'w') as f:
-		f.write(template)
+	pad_name = f'{ name }{ ext }'
+	pad_content = get_pad_content(pad_name)
 
-	return md, css, template
+	return pad_content
 
 # ---
 
@@ -102,25 +94,25 @@ def main(name):
 	# !!! Add a if/else here to check if the environment is "created" already
 	ext = '.md'
 	create_pad_on_first_run(name, ext)
-	return flask.render_template('pad.html', name=name.strip(), ext=ext)
+	return flask.render_template('pad.html', pad_url=APP.config['PAD_URL'], name=name.strip(), ext=ext)
 
 @APP.route('/<name>/pad/')
 def pad(name):
 	ext = '.md'
 	create_pad_on_first_run(name, ext)
-	return flask.render_template('pad.html', name=name.strip(), ext=ext)
+	return flask.render_template('pad.html', pad_url=APP.config['PAD_URL'], name=name.strip(), ext=ext)
 
 @APP.route('/<name>/stylesheet/', methods=['GET'])
 def stylesheet(name):
 	ext = '.css'
 	create_pad_on_first_run(name, ext)
-	return flask.render_template('pad.html', name=name.strip(), ext=ext)
+	return flask.render_template('pad.html', pad_url=APP.config['PAD_URL'], name=name.strip(), ext=ext)
 
 @APP.route('/<name>/template/', methods=['GET'])
 def template(name):
 	ext = '.template'
 	create_pad_on_first_run(name, ext)
-	return flask.render_template('pad.html', name=name.strip(), ext=ext)
+	return flask.render_template('pad.html', pad_url=APP.config['PAD_URL'], name=name.strip(), ext=ext)
 
 # @APP.route('/<name>/html/')
 # def html(name):
@@ -144,6 +136,7 @@ def pdf(name):
 	exts = ['.md', '.css', '.template']
 	for ext in exts:
 		create_pad_on_first_run(name, ext)
+		
 	return flask.render_template('pdf.html', name=name.strip())
 
 # //////////////
@@ -151,59 +144,33 @@ def pdf(name):
 
 @APP.route('/<name>/print.css')
 def css(name):
-	x, css, x = update_pad_contents(name)
+	css = update_pad_contents(name, '.css')
 	
 	return css, 200, {'Content-Type': 'text/css; charset=utf-8'}
 
 @APP.route('/<name>/pandoc-template.html')
 def pandoc_template(name):
-	x, x, template = update_pad_contents(name)
+	template = update_pad_contents(name, '.template')
 	
 	return template, 200, {'Content-Type': 'text/html; charset=utf-8'}
 
 @APP.route('/<name>/pagedjs.html')
 def pagedjs(name):
 	# update pad contents
-	md, css, template = update_pad_contents(name)
+	md = update_pad_contents(name, '.md')
 	# generate html page with the pandoc template (with paged.js inserted in the header)
+	# the pandoc template is loaded dynamically from /<name>/pandoc-template.html
+	# Needs pandoc >2.2.2 for this!
+	# https://github.com/jgm/pandoc/issues/5246
 	pandoc_args = [
 		'--toc',
 		'--toc-depth=1',
-		'--template=templates/pandoc-template.html',
+		f'--template=http://localhost:5001/{ name }/pandoc-template.html',
 		'--standalone'
 	]
 	html = pypandoc.convert_text(md, 'html', format='md', extra_args=pandoc_args)
 
 	return html, 200, {'Content-Type': 'text/html; charset=utf-8'}
-
-# //////////////
-
-def flask_logger():
-	# creates logging information
-	# https://www.vantage-ai.com/en/blog/adding-on-screen-logging-in-a-few-steps-using-a-flask-application
-	
-	from io import StringIO
-	import logging
-	from time import sleep 
-	
-	log_stream = StringIO()
-	handler = logging.StreamHandler(log_stream)
-	log = logging.getLogger('werkzeug')
-	log.setLevel(logging.DEBUG)
-	log.addHandler(handler)
-
-	while True:	
-		yield log_stream.getvalue()
-		# "flush" the stream, move the seek/truncate points to 0
-		log_stream.seek(0)
-		log_stream.truncate(0)
-
-		sleep(0.1)
-
-@APP.route('/log/', methods=['GET'])
-def log():
-	# returns logging information
-	return flask.Response(flask_logger(), mimetype="text/plain", content_type="text/event-stream")
 
 # /////////////
 
