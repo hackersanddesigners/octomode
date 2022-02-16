@@ -38,7 +38,7 @@ Open the application at <http://localhost:5001>.
 
 # snapshots
 
-![](snapshots/breakbreaky-in-octomode-1.png)
-![](snapshots/breakbreaky-in-octomode-2.png)
-![](snapshots/breakbreaky-in-octomode-3.png)
-![](snapshots/breakbreaky-in-octomode-4.png)
+![](snapshots/breakybreaky-in-octomode-1.png)
+![](snapshots/breakybreaky-in-octomode-2.png)
+![](snapshots/breakybreaky-in-octomode-3.png)
+![](snapshots/breakybreaky-in-octomode-4.png)
