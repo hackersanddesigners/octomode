@@ -12,6 +12,14 @@ Octomode is a collective editing space for PDF making, using Etherpad, Paged.js 
 
 Open the application at <http://localhost:5001>.
 
+## Dependencies
+
+`python` dependencies are listed in `requirements.txt`
+
+`system` dependencies are:
+
+* `pandoc` >= `2.2.2`
+
 ## Use octomode on a server
 
 * configure the webserver to listen to the port of the flask application, for example with a subdomain
