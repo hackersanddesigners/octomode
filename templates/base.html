@@ -4,8 +4,6 @@
 	<meta charset="utf-8" />
 	<title>{{ name }}</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
-	<!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
-	<!-- <script src="{{ url_for('static', filename='logger.js') }}"></script> -->
 	{% block head %}
 	{% endblock %}
 </head>
@@ -22,10 +20,9 @@ window.addEventListener('load', function () {
 	const nav = document.createElement('div');
 		  nav.id = 'nav';
 	const name = '{{ name }}';
-	const backlog = '<a href="/${ name }/backlog/"><button>backlog</button></a>';
 	
 	nav.innerHTML = `
-		<h1>${ name } <em class="octomode">in octomode</em></h1>
+		<h1>${ name } <a href="/"><em class="octomode">in octomode</em></a></h1>
 		<div id="buttons">
 			<a href="/${ name }/pad/"><button>pad</button></a>: <input type="text" name="pad" value="https://pad.vvvvvvaria.org/${ name }.md">
 			<a href="/${ name }/stylesheet/"><button>stylesheet</button></a>: <input type="text" name="pad" value="https://pad.vvvvvvaria.org/${ name }.css">
