@@ -35,3 +35,10 @@ Open the application at <http://localhost:5001>.
 * Etherdump https://gitlab.constantvzw.org/aa/etherdump by Michael Murtaugh/Constant
 * Pad2Print https://gitlab.com/Luuse/pad2print by Luuse
 * JupyterPi https://git.xpub.nl/XPUB/jupyterpi by Michael Murtaugh/XPUB
+
+# snapshots
+
+![](snapshots/breakbreaky-in-octomode-1.png)
+![](snapshots/breakbreaky-in-octomode-2.png)
+![](snapshots/breakbreaky-in-octomode-3.png)
+![](snapshots/breakbreaky-in-octomode-4.png)
