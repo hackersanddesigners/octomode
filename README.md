@@ -16,17 +16,13 @@ Open the application at <http://localhost:5001>.
 
 `python` dependencies are listed in `requirements.txt`
 
-`system` dependencies are:
-
-* `pandoc` >= `2.2.2`
-
 ## Use octomode on a server
 
-* configure the webserver to listen to the port of the flask application, for example with a subdomain
-* expand the current https certificate for this subdomain
-* restart nginx (`sudo service reload nginx`)
-* to keep the flask application running in the background: add a new config to supervisor (`cp /etc/supervisor/conf.d/previousexample.conf new.conf`)
-* restart supervisor (`sudo service reload supervisor`)
+* Configure the webserver to listen to the port of the flask application, for example with a subdomain
+* Expand the current https certificate for a subdomain
+* Restart nginx (`sudo service reload nginx`)
+* To keep the flask application running in the background: add a new config to supervisor (`cp /etc/supervisor/conf.d/previousexample.conf new.conf`)
+* Restart supervisor (`sudo service reload supervisor`)
 
 # Refs
 
@@ -36,7 +32,7 @@ Open the application at <http://localhost:5001>.
 * Pad2Print https://gitlab.com/Luuse/pad2print by Luuse
 * JupyterPi https://git.xpub.nl/XPUB/jupyterpi by Michael Murtaugh/XPUB
 
-# snapshots
+# Snapshots
 
 ![](snapshots/breakybreaky-in-octomode-1.png)
 ![](snapshots/breakybreaky-in-octomode-2.png)
