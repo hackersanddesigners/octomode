@@ -1,20 +1,29 @@
-import flask
-from flask import request
+import os
+import json
+from flask import Flask, request, render_template, redirect
 from urllib.request import urlopen
 from urllib.parse import urlencode
-import json
-import os
-import pypandoc
-from jinja2 import Template
 
-APP = flask.Flask(__name__)
+# To sanitize Flask input fields
+from flask import escape
+
+# To sanitize Markdown input
+import markdown
+import bleach
+
+APP = Flask(__name__)
 APP.config.from_object("config.Config")
 
 # ---
 
-def get_pad_content(pad):
+def get_pad_content(pad_name, ext=""):
+	if ext:
+		pad_name = f'{ pad_name }{ ext }'
+
+	print(pad_name)
+
 	arguments = { 
-		'padID' : pad,
+		'padID' : pad_name,
 		'apikey' : APP.config['PAD_API_KEY']
 	}
 	api_call = 'getText'
@@ -27,7 +36,6 @@ def get_pad_content(pad):
 		api_call = 'getText'
 		response = json.load(urlopen(f"{ APP.config['PAD_API_URL'] }{ api_call }", data=urlencode(arguments).encode()))
 
-	# print(response)
 	content = response['data']['text']
 	return content
 
@@ -44,136 +52,121 @@ def create_pad_on_first_run(name, ext):
 	pads = all_pads()
 	pad = name+ext
 
-	if 'md' in ext:
-		default_template = 'templates/default.md'
-	elif 'css' in ext:
-		default_template = 'templates/default.css'
-	elif 'template' in ext:
-		default_template = 'templates/default-pandoc-template.html'
-
-	if 'template' in ext:
-		default_template = open(default_template).read()
-		jinja_template = Template(default_template)
-		default_template = jinja_template.render(name=name.strip())
-	else:
-		default_template = open(default_template).read()
-
 	if pad not in pads['data']['padIDs']:
+
+		# Select default template
+		if 'md' in ext:
+			default_template = 'templates/default.md'
+		elif 'css' in ext:
+			default_template = 'templates/default.css'
+		default_template = open(default_template).read()
+
+		# Create pad and add the default template
 		arguments = { 
 			'padID' : pad,
 			'apikey' : APP.config['PAD_API_KEY'],
 			'text' : default_template
 		}
 		api_call = 'createPad'
-		response = json.load(urlopen(f"{ APP.config['PAD_API_URL'] }{ api_call }", data=urlencode(arguments).encode()))
+		json.load(urlopen(f"{ APP.config['PAD_API_URL'] }{ api_call }", data=urlencode(arguments).encode()))
 
-def update_pad_contents(name, ext):
-	# download the md pad + stylesheet + template pad
-	pad_name = f'{ name }{ ext }'
-	pad_content = get_pad_content(pad_name)
+def md_to_html(md_pad_content):
+	# Convert Markdown to HTML
+	html = markdown.markdown(md_pad_content, extensions=['meta'])
+	
+	# Sanitize the Markdown
+	# html = bleach.clean(html)
+	
+	# Another way to Sanitize
+	from markupsafe import Markup
+	html = Markup(html) # Maybe not safe enough?
+	
+	return html
 
-	return pad_content
+def get_md_metadata(md_pad_content):
+	# Read the metadata from the Markdown
+	md = markdown.Markdown(extensions=['meta'])
+	md.convert(md_pad_content)
+	metadata = md.Meta
+
+	return metadata
 
 # ---
 
 @APP.route('/', methods=['GET', 'POST'])
 def index():
-	name = request.values.get('name')
+	name = False
+	if request.values.get('name'):
+		name = escape(request.values.get('name')) # Returns a Markup() object, which is "None" when False
 	if name: 
 		# This is when the environment is "created"
 		# The pads are filled with the default templates (pad, stylesheet, template)
-		exts = ['.md', '.css', '.template']
+		exts = ['.md', '.css']
 		for ext in exts:
 			create_pad_on_first_run(name, ext)
-		return flask.redirect(f'/{ name }/')
+		return redirect(f'/{ name }/')
 	else:
-		return flask.render_template('start.html')
+		return render_template('start.html')
 
 @APP.route('/<name>/', methods=['GET'])
 def main(name):
-	# !!! Add a if/else here to check if the environment is "created" already
-	ext = '.md'
-	create_pad_on_first_run(name, ext)
-	return flask.render_template('pad.html', pad_url=APP.config['PAD_URL'], name=name.strip(), ext=ext)
+	return redirect(f'/{ name }/pad/')
 
 @APP.route('/<name>/pad/')
 def pad(name):
-	ext = '.md'
-	create_pad_on_first_run(name, ext)
-	return flask.render_template('pad.html', pad_url=APP.config['PAD_URL'], name=name.strip(), ext=ext)
+	pad_name = f'{ name }.md'
+	url = os.path.join(APP.config['PAD_URL'], pad_name)
+	return render_template('iframe.html', url=url, name=name.strip())
 
 @APP.route('/<name>/stylesheet/', methods=['GET'])
 def stylesheet(name):
-	ext = '.css'
-	create_pad_on_first_run(name, ext)
-	return flask.render_template('pad.html', pad_url=APP.config['PAD_URL'], name=name.strip(), ext=ext)
+	pad_name = f'{ name }.css'
+	url = os.path.join(APP.config['PAD_URL'], pad_name)
+	return render_template('iframe.html', url=url, name=name.strip())
 
-@APP.route('/<name>/template/', methods=['GET'])
-def template(name):
-	ext = '.template'
-	create_pad_on_first_run(name, ext)
-	return flask.render_template('pad.html', pad_url=APP.config['PAD_URL'], name=name.strip(), ext=ext)
-
-# @APP.route('/<name>/html/')
-# def html(name):
-# 	# update pad contents
-# 	md, css, template = update_pad_contents(name)
-# 	# generate html page
-# 	pandoc_args = [
-# 		# '--css=static/print.css',
-# 		'--toc',
-# 		'--toc-depth=1',
-# 		'--template=templates/pandoc-template.html',
-# 		'--standalone'
-# 	]
-# 	html = pypandoc.convert_text(md, 'html', format='md', extra_args=pandoc_args)
-
-# 	return flask.render_template('html.html', html=html, name=name.strip())
+@APP.route('/<name>/html/')
+def html(name):
+	path = os.path.join(f'/{ name }/', 'preview.html')
+	return render_template('iframe.html', url=path, name=name.strip())
 
 @APP.route('/<name>/pdf/')
 def pdf(name):
-	# In case the URL is edited directly with a new name
-	exts = ['.md', '.css', '.template']
-	for ext in exts:
-		create_pad_on_first_run(name, ext)
-		
-	return flask.render_template('pdf.html', name=name.strip())
+	path = os.path.join(f'/{ name }/', 'pagedjs.html')
+	return render_template('pdf.html', url=path, name=name.strip())
 
-# //////////////
-# rendered resources (not saved as a file on the server)
+# //////////////////
+# RENDERED RESOURCES 
+# //////////////////
+# (These are not saved as a file on the server)
 
-@APP.route('/<name>/print.css')
+@APP.route('/<name>/stylesheet.css')
 def css(name):
-	css = update_pad_contents(name, '.css')
+	css = get_pad_content(name, '.css')
+	# Insert CSS sanitizer here.
 	
 	return css, 200, {'Content-Type': 'text/css; charset=utf-8'}
 
-@APP.route('/<name>/pandoc-template.html')
-def pandoc_template(name):
-	template = update_pad_contents(name, '.template')
+@APP.route('/<name>/preview.html')
+def preview(name):
+	# TO GENERATE THE PREVIEW WEBPAGE
+	md_pad_content = get_pad_content(name, ext='.md')
+	html = md_to_html(md_pad_content)
+	metadata = get_md_metadata(md_pad_content)
+	lang = metadata['language'][0]
 	
-	return template, 200, {'Content-Type': 'text/html; charset=utf-8'}
+	return render_template('preview.html', name=name.strip(), pad_content=html, lang=lang)
 
 @APP.route('/<name>/pagedjs.html')
 def pagedjs(name):
-	# update pad contents
-	md = update_pad_contents(name, '.md')
-	# generate html page with the pandoc template (with paged.js inserted in the header)
-	# the pandoc template is loaded dynamically from /<name>/pandoc-template.html
-	# Needs pandoc >2.2.2 for this!
-	# https://github.com/jgm/pandoc/issues/5246
-	pandoc_args = [
-		'--toc',
-		'--toc-depth=1',
-		f'--template=http://localhost:5001/{ name }/pandoc-template.html',
-		'--standalone'
-	]
-	html = pypandoc.convert_text(md, 'html', format='md', extra_args=pandoc_args)
+	# TO GENERATE THE PAGED.JS WEBPAGE
+	md_pad_content = get_pad_content(name, ext='.md')
+	html = md_to_html(md_pad_content)
+	metadata = get_md_metadata(md_pad_content)
+	lang = metadata['language'][0]
+	
+	return render_template('pagedjs.html', name=name.strip(), pad_content=html, lang=lang)
 
-	return html, 200, {'Content-Type': 'text/html; charset=utf-8'}
-
-# /////////////
-
+# //////////////////
 
 if __name__ == '__main__':
 	APP.debug=True
