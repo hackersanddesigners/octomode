@@ -1,10 +1,16 @@
+@charset "utf-8"; 
+
+/* ADD SHORT TEXT HERE: THIS DOCUMENT SPEAKS CSS */
+
 @page{
-	size: A5;
+    size: A5;
 }
 @page:first{
-	background-color: pink;
+    background-color: pink;
 }
-section#cover,
-section#TOC{
-	page-break-after: always;
+body{
+    color: green;
+}
+section#cover{
+    page-break-after: always;
 }
