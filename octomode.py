@@ -9,6 +9,7 @@ from flask import escape
 
 # To sanitize Markdown input
 import markdown
+import pypandoc
 import bleach
 
 APP = Flask(__name__)
@@ -72,7 +73,8 @@ def create_pad_on_first_run(name, ext):
 
 def md_to_html(md_pad_content):
 	# Convert Markdown to HTML
-	html = markdown.markdown(md_pad_content, extensions=['meta'])
+	# html = markdown.markdown(md_pad_content, extensions=['meta', 'attr_list']) # attr_list does not work
+	html = pypandoc.convert_text(md_pad_content, 'html', format='md')
 	
 	# Sanitize the Markdown
 	# html = bleach.clean(html)
@@ -153,8 +155,9 @@ def preview(name):
 	html = md_to_html(md_pad_content)
 	metadata = get_md_metadata(md_pad_content)
 	lang = metadata['language'][0]
+	title = metadata['title'][0]
 	
-	return render_template('preview.html', name=name.strip(), pad_content=html, lang=lang)
+	return render_template('preview.html', name=name.strip(), pad_content=html, lang=lang, title=title)
 
 @APP.route('/<name>/pagedjs.html')
 def pagedjs(name):
@@ -163,8 +166,9 @@ def pagedjs(name):
 	html = md_to_html(md_pad_content)
 	metadata = get_md_metadata(md_pad_content)
 	lang = metadata['language'][0]
+	title = metadata['title'][0]
 	
-	return render_template('pagedjs.html', name=name.strip(), pad_content=html, lang=lang)
+	return render_template('pagedjs.html', name=name.strip(), pad_content=html, lang=lang, title=title)
 
 # //////////////////
 
