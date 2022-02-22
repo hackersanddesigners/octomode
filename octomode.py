@@ -5,7 +5,7 @@ from urllib.request import urlopen
 from urllib.parse import urlencode
 
 # To sanitize Flask input fields
-from flask import escape
+from markupsafe import Markup, escape
 
 # To sanitize Markdown input
 import markdown
@@ -79,9 +79,9 @@ def md_to_html(md_pad_content):
 	# Sanitize the Markdown
 	# html = bleach.clean(html)
 	
-	# Another way to Sanitize
-	from markupsafe import Markup
-	html = Markup(html) # Maybe not safe enough?
+	# Another built-in Flask way to sanitize
+	html = escape(html) 
+	html = Markup(html)
 	
 	return html
 
