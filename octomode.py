@@ -80,7 +80,7 @@ def md_to_html(md_pad_content):
 	# html = bleach.clean(html)
 	
 	# Another built-in Flask way to sanitize
-	html = escape(html) 
+	# html = escape(html) 
 	html = Markup(html)
 	
 	return html
