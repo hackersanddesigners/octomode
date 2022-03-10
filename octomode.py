@@ -8,9 +8,11 @@ from urllib.parse import urlencode
 from markupsafe import Markup, escape
 
 # To sanitize Markdown input
-import markdown
 import pypandoc
-import bleach
+# import bleach
+
+# To read the Markdown metadat
+import markdown
 
 APP = Flask(__name__)
 APP.config.from_object("config.Config")
