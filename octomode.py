@@ -18,6 +18,28 @@ APP = Flask(__name__)
 APP.config.from_object("config.Config")
 
 # ---
+# Workaround to map urls if the application runs from a non-root URL
+# From: https://stackoverflow.com/questions/18967441/add-a-prefix-to-all-flask-routes
+
+class PrefixMiddleware(object):
+
+    def __init__(self, app, prefix=''):
+        self.app = app
+        self.prefix = prefix
+
+    def __call__(self, environ, start_response):
+
+        if environ['PATH_INFO'].startswith(self.prefix):
+            environ['PATH_INFO'] = environ['PATH_INFO'][len(self.prefix):]
+            environ['SCRIPT_NAME'] = self.prefix
+            return self.app(environ, start_response)
+        else:
+            start_response('404', [('Content-Type', 'text/plain')])
+            return ["This url does not belong to the app.".encode()]
+
+APP.wsgi_app = PrefixMiddleware(app.wsgi_app, prefix=APP.config['APPLICATION_ROOT'])
+
+# ---
 
 def get_pad_content(pad_name, ext=""):
 	if ext:
@@ -108,13 +130,13 @@ def index():
 		exts = ['.md', '.css']
 		for ext in exts:
 			create_pad_on_first_run(name, ext)
-		return redirect(f'/{ name }/')
+		return redirect(url_for('pad', name=name))
 	else:
 		return render_template('start.html')
 
-@APP.route('/<name>/', methods=['GET'])
+@APP.route('/<name>/')
 def main(name):
-	return redirect(f'/{ name }/pad/')
+	return redirect(url_for('pad', name=name))
 
 @APP.route('/<name>/pad/')
 def pad(name):
@@ -122,7 +144,7 @@ def pad(name):
 	url = os.path.join(APP.config['PAD_URL'], pad_name)
 	return render_template('iframe.html', url=url, name=name.strip())
 
-@APP.route('/<name>/stylesheet/', methods=['GET'])
+@APP.route('/<name>/stylesheet/')
 def stylesheet(name):
 	pad_name = f'{ name }.css'
 	url = os.path.join(APP.config['PAD_URL'], pad_name)
