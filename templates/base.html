@@ -20,14 +20,15 @@ window.addEventListener('load', function () {
 	const nav = document.createElement('div');
 		  nav.id = 'nav';
 	const name = '{{ name }}';
+	const application_root = '{{ application_root }}';
 	
 	nav.innerHTML = `
 		<h1>${ name } <a href="/"><em class="octomode">in octomode</em></a></h1>
 		<div id="buttons">
-			<a href="/${ name }/pad/"><button>pad</button></a>: <input type="text" name="pad" value="https://pad.vvvvvvaria.org/${ name }.md">
-			<a href="/${ name }/stylesheet/"><button>stylesheet</button></a>: <input type="text" name="pad" value="https://pad.vvvvvvaria.org/${ name }.css">
-			<a href="/${ name }/html/"><button>html</button></a>
-			<a href="/${ name }/pdf/"><button>pdf</button></a>
+			<a href="${ application_root }${ name }/pad/"><button>pad</button></a>: <input type="text" name="pad" value="https://pad.vvvvvvaria.org/${ name }.md">
+			<a href="${ application_root }${ name }/stylesheet/"><button>stylesheet</button></a>: <input type="text" name="pad" value="https://pad.vvvvvvaria.org/${ name }.css">
+			<a href="${ application_root }${ name }/html/"><button>html</button></a>
+			<a href="${ application_root }${ name }/pdf/"><button>pdf</button></a>
 		</div>`;
 
 	document.body.insertBefore(nav, document.body.firstChild);

@@ -120,23 +120,23 @@ def main(name):
 def pad(name):
 	pad_name = f'{ name }.md'
 	url = os.path.join(APP.config['PAD_URL'], pad_name)
-	return render_template('iframe.html', url=url, name=name.strip())
+	return render_template('iframe.html', url=url, name=name.strip(), application_root=APP.config["APPLICATION_ROOT"])
 
 @APP.route('/<name>/stylesheet/')
 def stylesheet(name):
 	pad_name = f'{ name }.css'
 	url = os.path.join(APP.config['PAD_URL'], pad_name)
-	return render_template('iframe.html', url=url, name=name.strip())
+	return render_template('iframe.html', url=url, name=name.strip(), application_root=APP.config["APPLICATION_ROOT"])
 
 @APP.route('/<name>/html/')
 def html(name):
 	path = os.path.join(f'/{ name }/', 'preview.html')
-	return render_template('iframe.html', url=path, name=name.strip())
+	return render_template('iframe.html', url=path, name=name.strip(), application_root=APP.config["APPLICATION_ROOT"])
 
 @APP.route('/<name>/pdf/')
 def pdf(name):
 	path = os.path.join(f'/{ name }/', 'pagedjs.html')
-	return render_template('pdf.html', url=path, name=name.strip())
+	return render_template('pdf.html', url=path, name=name.strip(), application_root=APP.config["APPLICATION_ROOT"])
 
 # //////////////////
 # RENDERED RESOURCES 
@@ -156,10 +156,14 @@ def preview(name):
 	md_pad_content = get_pad_content(name, ext='.md')
 	html = md_to_html(md_pad_content)
 	metadata = get_md_metadata(md_pad_content)
-	lang = metadata['language'][0]
-	title = metadata['title'][0]
+	if metadata:
+		lang = metadata['language'][0]
+		title = metadata['title'][0]
+	else:
+		lang = "en"
+		title = "No title"
 	
-	return render_template('preview.html', name=name.strip(), pad_content=html, lang=lang, title=title)
+	return render_template('preview.html', name=name.strip(), pad_content=html, lang=lang, title=title, application_root=APP.config["APPLICATION_ROOT"])
 
 @APP.route('/<name>/pagedjs.html')
 def pagedjs(name):
@@ -170,7 +174,7 @@ def pagedjs(name):
 	lang = metadata['language'][0]
 	title = metadata['title'][0]
 	
-	return render_template('pagedjs.html', name=name.strip(), pad_content=html, lang=lang, title=title)
+	return render_template('pagedjs.html', name=name.strip(), pad_content=html, lang=lang, title=title, application_root=APP.config["APPLICATION_ROOT"])
 
 # //////////////////
 
