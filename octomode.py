@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, url_for
 from urllib.request import urlopen
 from urllib.parse import urlencode
 
@@ -97,7 +97,7 @@ def get_md_metadata(md_pad_content):
 
 # ---
 
-@APP.route('/', methods=['GET', 'POST'])
+@APP.route(APP.config["APPLICATION_ROOT"], methods=['GET', 'POST'])
 def index():
 	name = False
 	if request.values.get('name'):
@@ -110,30 +110,30 @@ def index():
 			create_pad_on_first_run(name, ext)
 		return redirect(url_for('pad', name=name))
 	else:
-		return render_template('start.html', application_root=APP.config['APPLICATION_ROOT'])
+		return render_template('start.html', application_root=APP.config["APPLICATION_ROOT"])
 
-@APP.route('/<name>/')
+@APP.route(f'{ APP.config["APPLICATION_ROOT"] }/<name>/')
 def main(name):
 	return redirect(url_for('pad', name=name))
 
-@APP.route('/<name>/pad/')
+@APP.route(f'{ APP.config["APPLICATION_ROOT"] }/<name>/pad/')
 def pad(name):
 	pad_name = f'{ name }.md'
 	url = os.path.join(APP.config['PAD_URL'], pad_name)
 	return render_template('iframe.html', url=url, name=name.strip())
 
-@APP.route('/<name>/stylesheet/')
+@APP.route(f'{ APP.config["APPLICATION_ROOT"] }/<name>/stylesheet/')
 def stylesheet(name):
 	pad_name = f'{ name }.css'
 	url = os.path.join(APP.config['PAD_URL'], pad_name)
 	return render_template('iframe.html', url=url, name=name.strip())
 
-@APP.route('/<name>/html/')
+@APP.route(f'{ APP.config["APPLICATION_ROOT"] }/<name>/html/')
 def html(name):
 	path = os.path.join(f'/{ name }/', 'preview.html')
 	return render_template('iframe.html', url=path, name=name.strip())
 
-@APP.route('/<name>/pdf/')
+@APP.route(f'{ APP.config["APPLICATION_ROOT"] }/<name>/pdf/')
 def pdf(name):
 	path = os.path.join(f'/{ name }/', 'pagedjs.html')
 	return render_template('pdf.html', url=path, name=name.strip())
@@ -143,14 +143,14 @@ def pdf(name):
 # //////////////////
 # (These are not saved as a file on the server)
 
-@APP.route('/<name>/stylesheet.css')
+@APP.route(f'{ APP.config["APPLICATION_ROOT"] }/<name>/stylesheet.css')
 def css(name):
 	css = get_pad_content(name, '.css')
 	# Insert CSS sanitizer here.
 	
 	return css, 200, {'Content-Type': 'text/css; charset=utf-8'}
 
-@APP.route('/<name>/preview.html')
+@APP.route(f'{ APP.config["APPLICATION_ROOT"] }/<name>/preview.html')
 def preview(name):
 	# TO GENERATE THE PREVIEW WEBPAGE
 	md_pad_content = get_pad_content(name, ext='.md')
@@ -161,7 +161,7 @@ def preview(name):
 	
 	return render_template('preview.html', name=name.strip(), pad_content=html, lang=lang, title=title)
 
-@APP.route('/<name>/pagedjs.html')
+@APP.route(f'{ APP.config["APPLICATION_ROOT"] }/<name>/pagedjs.html')
 def pagedjs(name):
 	# TO GENERATE THE PAGED.JS WEBPAGE
 	md_pad_content = get_pad_content(name, ext='.md')
