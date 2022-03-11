@@ -130,13 +130,13 @@ def stylesheet(name):
 
 @APP.route('/<name>/html/')
 def html(name):
-	path = os.path.join(f'/{ name }/', 'preview.html')
-	return render_template('iframe.html', url=path, name=name.strip(), application_root=APP.config["APPLICATION_ROOT"])
+	url = os.path.join(APP.config["APPLICATION_ROOT"], f'/{ name }/', 'preview.html')
+	return render_template('iframe.html', url=url, name=name.strip(), application_root=APP.config["APPLICATION_ROOT"])
 
 @APP.route('/<name>/pdf/')
 def pdf(name):
-	path = os.path.join(f'/{ name }/', 'pagedjs.html')
-	return render_template('pdf.html', url=path, name=name.strip(), application_root=APP.config["APPLICATION_ROOT"])
+	url = os.path.join(APP.config["APPLICATION_ROOT"], f'/{ name }/', 'pagedjs.html')
+	return render_template('pdf.html', url=url, name=name.strip(), application_root=APP.config["APPLICATION_ROOT"])
 
 # //////////////////
 # RENDERED RESOURCES 
