@@ -130,12 +130,12 @@ def stylesheet(name):
 
 @APP.route('/<name>/html/')
 def html(name):
-	url = os.path.join(APP.config["APPLICATION_ROOT"], f'/{ name }/', 'preview.html')
+	url = os.path.join(APP.config["APPLICATION_ROOT"], name, 'preview.html')
 	return render_template('iframe.html', url=url, name=name.strip(), application_root=APP.config["APPLICATION_ROOT"])
 
 @APP.route('/<name>/pdf/')
 def pdf(name):
-	url = os.path.join(APP.config["APPLICATION_ROOT"], f'/{ name }/', 'pagedjs.html')
+	url = os.path.join(APP.config["APPLICATION_ROOT"], name, 'pagedjs.html')
 	return render_template('pdf.html', url=url, name=name.strip(), application_root=APP.config["APPLICATION_ROOT"])
 
 # //////////////////
