@@ -23,7 +23,7 @@ window.addEventListener('load', function () {
 	const application_root = '{{ application_root }}';
 	
 	nav.innerHTML = `
-		<h1>${ name } <a href="/"><em class="octomode">in octomode</em></a></h1>
+		<h1>${ name } <a href="${ application_root }"><em class="octomode">in octomode</em></a></h1>
 		<div id="buttons">
 			<a href="${ application_root }${ name }/pad/"><button>pad</button></a>: <input type="text" name="pad" value="https://pad.vvvvvvaria.org/${ name }.md">
 			<a href="${ application_root }${ name }/stylesheet/"><button>stylesheet</button></a>: <input type="text" name="pad" value="https://pad.vvvvvvaria.org/${ name }.css">
