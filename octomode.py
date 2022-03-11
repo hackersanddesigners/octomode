@@ -108,13 +108,13 @@ def index():
 		exts = ['.md', '.css']
 		for ext in exts:
 			create_pad_on_first_run(name, ext)
-		return redirect(url_for('pad', name=name))
+		return redirect(f'{ APP.config["APPLICATION_ROOT"] }{ name }/pad/')
 	else:
 		return render_template('start.html', application_root=APP.config["APPLICATION_ROOT"])
 
 @APP.route('/<name>/')
 def main(name):
-	return redirect(url_for('pad', name=name))
+	return redirect(f'{ APP.config["APPLICATION_ROOT"] }{ name }/pad/')
 
 @APP.route('/<name>/pad/')
 def pad(name):
