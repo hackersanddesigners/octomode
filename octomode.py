@@ -110,7 +110,7 @@ def index():
 			create_pad_on_first_run(name, ext)
 		return redirect(url_for('pad', name=name))
 	else:
-		return render_template('start.html')
+		return render_template('start.html', application_root=APP.config['APPLICATION_ROOT'])
 
 @APP.route('/<name>/')
 def main(name):
