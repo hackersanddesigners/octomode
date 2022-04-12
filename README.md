@@ -85,7 +85,11 @@ Open the application at <http://localhost:5001>.
 
 `python` dependencies are listed in `requirements.txt`
 
-## Use octomode on a server
+## Note
+
+It's recommended to use firefox when working with octomode locally. Chrome or Chromium do not load external etherpads in iframes. 
+
+# Use octomode on a server
 
 * Configure the webserver to listen to the port of the flask application, for example with a subdomain
 * Expand the current https certificate for a subdomain
