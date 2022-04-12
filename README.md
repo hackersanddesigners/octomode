@@ -57,7 +57,12 @@ section#cover{
     page-break-after: always;
 }
 ```
-# Continuums
+
+### Note
+
+When working with multiple people on one PDF it is recommended to use the same browser. CSS rules are rendered slightly differently on different browsers.
+
+## Continuums
 
 Octomode resonates with other pad-to-pdf software practices, including: 
 
@@ -67,7 +72,7 @@ Octomode resonates with other pad-to-pdf software practices, including:
 * Pad2Print https://gitlab.com/Luuse/pad2print by Luuse
 * JupyterPi https://git.xpub.nl/XPUB/jupyterpi by Michael Murtaugh/XPUB
 
-# Use octomode locally
+## Use octomode locally
 
 You can clone this repository to run octomode on your own computer or server.
 
@@ -81,15 +86,15 @@ You can clone this repository to run octomode on your own computer or server.
 
 Open the application at <http://localhost:5001>.
 
-## Dependencies
+### Dependencies
 
 `python` dependencies are listed in `requirements.txt`
 
-## Note
+### Note
 
 It's recommended to use firefox when working with octomode locally. Chrome or Chromium do not load external etherpads in iframes. 
 
-# Use octomode on a server
+## Use octomode on a server
 
 * Configure the webserver to listen to the port of the flask application, for example with a subdomain
 * Expand the current https certificate for a subdomain
@@ -97,7 +102,7 @@ It's recommended to use firefox when working with octomode locally. Chrome or Ch
 * To keep the flask application running in the background: add a new config to supervisor (`cp /etc/supervisor/conf.d/previousexample.conf new.conf`)
 * Restart supervisor (`sudo service reload supervisor`)
 
-# Snapshots
+## Snapshots
 
 ![](snapshots/breakybreaky-in-octomode-1.png)
 ![](snapshots/breakybreaky-in-octomode-2.png)
