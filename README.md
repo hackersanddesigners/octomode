@@ -80,7 +80,7 @@ You can clone this repository to run octomode on your own computer or server.
 
 `cd octomode`
 
-`make setup` (sets up a virtual environment and install the requirements)
+`make setup` (sets up a virtual environment and install the requirements, you only need to do this once)
 
 `make run` (runs the Flask application)
 
@@ -89,6 +89,10 @@ Open the application at <http://localhost:5001>.
 ### Dependencies
 
 `python` dependencies are listed in `requirements.txt`
+
+To install them, you can run:
+
+`make setup`
 
 ### Note
 
