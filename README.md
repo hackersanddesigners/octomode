@@ -68,7 +68,6 @@ Octomode resonates other software practices based on pad-to-PDF workflows or col
 
 * wiki-to-PDF http://titipi.org/wiki/index.php/Wiki-to-pdf by Martino Morandi/TITiPI
 * Living Glossary Enviroment http://tool.attempt.press/ by Camilo Garcia/Attempt
-* JupyterPi https://git.xpub.nl/XPUB/jupyterpi by Michael Murtaugh/XPUB
 * Ethertoff http://osp.kitchen/tools/ethertoff/ by OSP
 * Etherbox https://networksofonesown.constantvzw.org/ by Michael Murtaugh/Constant
 * Etherdump https://gitlab.constantvzw.org/aa/etherdump by Michael Murtaugh/Constant
