@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-	<meta charset="utf-8" />
-	<title>{{ name }} in octomode</title>
+  <meta charset="utf-8" />
+  <title>{{ name }} in octomode</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
-	{% block head %}
-	{% endblock %}
+  {% block head %}
+  {% endblock %}
 </head>
 <body>
-	<div id="wrapper">
-		{% block content %}
-		{% endblock %}
-	</div>
+  <div id="wrapper">
+    {% block content %}
+    {% endblock %}
+  </div>
 </body>
 <script>
 window.addEventListener('load', function () {
 
-	// Insert the nav buttons, after the page is loaded
-	const nav = document.createElement('div');
-	nav.id = 'nav';
+  // Insert the nav buttons, after the page is loaded
+  const nav = document.createElement('div');
+  nav.id = 'nav';
 
-	nav.innerHTML = `
+  nav.innerHTML = `
     <h1>{{ name }} <a href="/"><em class="octomode">in octomode</em></a></h1>
-		<div id="buttons">
+    <div id="buttons">
 
       <a href="/{{ name }}/pad"><button>pad</button></a>:
       <input type="text" name="pad" value="https://pad.vvvvvvaria.org/{{ name }}.md">
@@ -33,9 +33,9 @@ window.addEventListener('load', function () {
       <a href="/{{ name }}/html"><button>html</button></a>
 
       <a href="/{{ name }}/pdf"><button>pdf</button></a>
-		</div>`;
+    </div>`;
 
-	document.body.insertBefore(nav, document.body.firstChild);
+  document.body.insertBefore(nav, document.body.firstChild);
 
 })
 </script>
