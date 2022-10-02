@@ -16,7 +16,7 @@ import markdown
 
 class Config(object):
     PORTNUMBER = int(os.environ.get('OCTOMODE_PORTNUMBER', 5001))
-    PAD_URL = os.environ.get('OCTOMODE_PAD_URL', 'https://pad.vvvvvvaria.org' )
+    PAD_URL = os.environ.get('OCTOMODE_PAD_URL', 'https://pad.vvvvvvaria.org')
     PAD_API_URL = os.environ.get('OCTOMODE_PAD_API_URL', 'https://pad.vvvvvvaria.org/api/1.2.15')
     PAD_API_KEY = os.environ.get('OCTOMODE_PAD_API_KEY', '')
 
@@ -121,7 +121,7 @@ def index():
             create_pad_on_first_run(name, ext)
         return redirect(f"/{ name }/pad")
     else:
-        return render_template('start.html')
+        return render_template('start.html', pad_url=APP.config['PAD_URL'])
 
 @APP.route('/<name>')
 def main(name):
@@ -130,22 +130,22 @@ def main(name):
 @APP.route('/<name>/pad')
 def pad(name):
     url = f"{ APP.config['PAD_URL'] }/{ name }.md"
-    return render_template('iframe.html', url=url, name=name.strip())
+    return render_template('iframe.html', url=url, name=name.strip(), pad_url=APP.config['PAD_URL'])
 
 @APP.route('/<name>/stylesheet')
 def stylesheet(name):
     url = f"{ APP.config['PAD_URL'] }/{ name }.css"
-    return render_template('iframe.html', url=url, name=name.strip())
+    return render_template('iframe.html', url=url, name=name.strip(), pad_url=APP.config['PAD_URL'])
 
 @APP.route('/<name>/html')
 def html(name):
     url = f"/{ name }/preview.html"
-    return render_template('iframe.html', url=url, name=name.strip())
+    return render_template('iframe.html', url=url, name=name.strip(), pad_url=APP.config['PAD_URL'])
 
 @APP.route('/<name>/pdf')
 def pdf(name):
     url = f"/{name}/pagedjs.html"
-    return render_template('pdf.html', url=url, name=name.strip())
+    return render_template('pdf.html', url=url, name=name.strip(), pad_url=APP.config['PAD_URL'])
 
 # //////////////////
 # RENDERED RESOURCES 
