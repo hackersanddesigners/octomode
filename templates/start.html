@@ -3,10 +3,10 @@
 <head>
 	<meta charset="utf-8" />
 	<title>octomode</title>
-	<link rel="stylesheet" type="text/css" href="{{ application_root }}static/main.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 </head>
 <body class="start-page">
-	<form action="{{ application_root }}" method="POST">
+	<form action="/" method="POST">
 		<h1><input type="submit" value="open"> <input type="text" name="name"> <em class="octomode">in octomode</em></h1>
 	</form>
 </body>

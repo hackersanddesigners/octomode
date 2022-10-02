@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect
 from urllib.request import urlopen
 from urllib.parse import urlencode
 
@@ -15,10 +15,9 @@ import pypandoc
 import markdown
 
 class Config(object):
-    APPLICATION_ROOT = '/'
     PORTNUMBER = int(os.environ.get('OCTOMODE_PORTNUMBER', 5001))
-    PAD_URL = os.environ.get('OCTOMODE_PAD_URL', 'https://pad.vvvvvvaria.org/' )
-    PAD_API_URL = os.environ.get('OCTOMODE_PAD_API_URL', 'https://pad.vvvvvvaria.org/api/1.2.15/')
+    PAD_URL = os.environ.get('OCTOMODE_PAD_URL', 'https://pad.vvvvvvaria.org' )
+    PAD_API_URL = os.environ.get('OCTOMODE_PAD_API_URL', 'https://pad.vvvvvvaria.org/api/1.2.15')
     PAD_API_KEY = os.environ.get('OCTOMODE_PAD_API_KEY', '')
 
 APP = Flask(__name__)
@@ -42,14 +41,14 @@ def get_pad_content(pad_name, ext=""):
         'apikey' : APP.config['PAD_API_KEY']
     }
     api_call = 'getText'
-    response = json.load(urlopen(f"{ APP.config['PAD_API_URL'] }{ api_call }", data=urlencode(arguments).encode()))
+    response = json.load(urlopen(f"{ APP.config['PAD_API_URL'] }/{ api_call }", data=urlencode(arguments).encode()))
 
     # create pad in case it does not yet exist
     if response['code'] == 1 and 'padID does not exist' == response['message']:
         api_call = 'createPad'
-        urlopen(f"{ APP.config['PAD_API_URL'] }{ api_call }", data=urlencode(arguments).encode())
+        urlopen(f"{ APP.config['PAD_API_URL'] }/{ api_call }", data=urlencode(arguments).encode())
         api_call = 'getText'
-        response = json.load(urlopen(f"{ APP.config['PAD_API_URL'] }{ api_call }", data=urlencode(arguments).encode()))
+        response = json.load(urlopen(f"{ APP.config['PAD_API_URL'] }/{ api_call }", data=urlencode(arguments).encode()))
 
     content = response['data']['text']
     return content
@@ -59,7 +58,7 @@ def all_pads():
         'apikey' : APP.config['PAD_API_KEY'],
     }
     api_call = 'listAllPads'
-    response = json.load(urlopen(f"{ APP.config['PAD_API_URL'] }{ api_call }", data=urlencode(arguments).encode()))
+    response = json.load(urlopen(f"{ APP.config['PAD_API_URL'] }/{ api_call }", data=urlencode(arguments).encode()))
 
     return response
 
@@ -83,7 +82,7 @@ def create_pad_on_first_run(name, ext):
             'text' : default_template
         }
         api_call = 'createPad'
-        json.load(urlopen(f"{ APP.config['PAD_API_URL'] }{ api_call }", data=urlencode(arguments).encode()))
+        json.load(urlopen(f"{ APP.config['PAD_API_URL'] }/{ api_call }", data=urlencode(arguments).encode()))
 
 def md_to_html(md_pad_content):
     # Convert Markdown to HTML
@@ -120,35 +119,33 @@ def index():
         exts = ['.md', '.css']
         for ext in exts:
             create_pad_on_first_run(name, ext)
-        return redirect(f'{ APP.config["APPLICATION_ROOT"] }{ name }/pad/')
+        return redirect(f"/{ name }/pad")
     else:
-        return render_template('start.html', application_root=APP.config["APPLICATION_ROOT"])
+        return render_template('start.html')
 
-@APP.route('/<name>/')
+@APP.route('/<name>')
 def main(name):
-    return redirect(f'{ APP.config["APPLICATION_ROOT"] }{ name }/pad/')
+    return redirect(f"/{ name }/pad")
 
-@APP.route('/<name>/pad/')
+@APP.route('/<name>/pad')
 def pad(name):
-    pad_name = f'{ name }.md'
-    url = os.path.join(APP.config['PAD_URL'], pad_name)
-    return render_template('iframe.html', url=url, name=name.strip(), application_root=APP.config["APPLICATION_ROOT"])
+    url = f"{ APP.config['PAD_URL'] }/{ name }.md"
+    return render_template('iframe.html', url=url, name=name.strip())
 
-@APP.route('/<name>/stylesheet/')
+@APP.route('/<name>/stylesheet')
 def stylesheet(name):
-    pad_name = f'{ name }.css'
-    url = os.path.join(APP.config['PAD_URL'], pad_name)
-    return render_template('iframe.html', url=url, name=name.strip(), application_root=APP.config["APPLICATION_ROOT"])
+    url = f"{ APP.config['PAD_URL'] }/{ name }.css"
+    return render_template('iframe.html', url=url, name=name.strip())
 
-@APP.route('/<name>/html/')
+@APP.route('/<name>/html')
 def html(name):
-    url = os.path.join(APP.config["APPLICATION_ROOT"], name, 'preview.html')
-    return render_template('iframe.html', url=url, name=name.strip(), application_root=APP.config["APPLICATION_ROOT"])
+    url = f"/{ name }/preview.html"
+    return render_template('iframe.html', url=url, name=name.strip())
 
-@APP.route('/<name>/pdf/')
+@APP.route('/<name>/pdf')
 def pdf(name):
-    url = os.path.join(APP.config["APPLICATION_ROOT"], name, 'pagedjs.html')
-    return render_template('pdf.html', url=url, name=name.strip(), application_root=APP.config["APPLICATION_ROOT"])
+    url = f"/{name}/pagedjs.html"
+    return render_template('pdf.html', url=url, name=name.strip())
 
 # //////////////////
 # RENDERED RESOURCES 
@@ -175,7 +172,7 @@ def preview(name):
         lang = "en"
         title = "No title"
 
-    return render_template('preview.html', name=name.strip(), pad_content=html, lang=lang, title=title, application_root=APP.config["APPLICATION_ROOT"])
+    return render_template('preview.html', name=name.strip(), pad_content=html, lang=lang, title=title)
 
 @APP.route('/<name>/pagedjs.html')
 def pagedjs(name):
@@ -186,10 +183,10 @@ def pagedjs(name):
     lang = metadata['language'][0]
     title = metadata['title'][0]
 
-    return render_template('pagedjs.html', name=name.strip(), pad_content=html, lang=lang, title=title, application_root=APP.config["APPLICATION_ROOT"])
+    return render_template('pagedjs.html', name=name.strip(), pad_content=html, lang=lang, title=title)
 
 # //////////////////
 
 if __name__ == '__main__':
     APP.debug=True
-    APP.run(host="0.0.0.0", port=f'{ APP.config["PORTNUMBER"] }', threaded=True)
+    APP.run(host="0.0.0.0", port=APP.config["PORTNUMBER"], threaded=True)

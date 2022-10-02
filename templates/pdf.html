@@ -1,4 +1,4 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 
 {% block content %}
 <iframe id="pdf" name="pdf" src="{{ url }}"></iframe>
@@ -16,7 +16,7 @@ window.addEventListener('load', function () {
       // Load the main.css again, to load the stylesheet for the nav
       var cssLink = document.createElement('link');
       cssLink.rel = 'stylesheet';
-      cssLink.href = '{{ application_root }}/static/main.css';
+      cssLink.href = '{{ url_for("static", filename="main.css") }}';
       var head = document.getElementsByTagName('head')[0];
       head.insertBefore(cssLink, head.firstChild);
 
