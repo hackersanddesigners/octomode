@@ -14,8 +14,20 @@ import pypandoc
 # To read the Markdown metadat
 import markdown
 
+class Config(object):
+    APPLICATION_ROOT = '/'
+    PORTNUMBER = int(os.environ.get('OCTOMODE_PORTNUMBER', 5001))
+    PAD_URL = os.environ.get('OCTOMODE_PAD_URL', 'https://pad.vvvvvvaria.org/' )
+    PAD_API_URL = os.environ.get('OCTOMODE_PAD_API_URL', 'https://pad.vvvvvvaria.org/api/1.2.15/')
+    PAD_API_KEY = os.environ.get('OCTOMODE_PAD_API_KEY', '')
+
 APP = Flask(__name__)
-APP.config.from_object("config.Config")
+APP.config.from_object(Config)
+
+if APP.config.get('PAD_API_KEY', '') == '':
+    print("error: you must provide a value for OCTOMODE_PAD_API_KEY")
+    print("error: e.g. export OCTOMODE_PAD_API_KEY=...")
+    exit(1)
 
 # ---
 
