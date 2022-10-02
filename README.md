@@ -1,12 +1,12 @@
-# Octomode 
+# Octomode
 
-*work-in-progress*
+> *work-in-progress*
 
-Octomode is a collective editing space for PDF making, using Etherpad, Paged.js and Flask. 
+Octomode is a collective editing space for PDF making, using Etherpad, Paged.js and Flask.
 
 ## How to use Octomode?
 
-If you want to work collectively on making a PDF, you can use octomode. There is an instance installed here: <https://octomode.vvvvvvaria.org/>. You can write any name of in the input field, this will create a new octomode environment. 
+If you want to work collectively on making a PDF, you can use octomode. There is an instance installed here: <https://octomode.vvvvvvaria.org/>. You can write any name of in the input field, this will create a new octomode environment.
 
 Working in octomode includes:
 
@@ -39,7 +39,7 @@ language: en
 ### Octomode CSS template
 
 ```
-@charset "utf-8"; 
+@charset "utf-8";
 
 @page{
     size: A5;
@@ -64,7 +64,7 @@ When working with multiple people on one PDF it is recommended to use the same b
 
 ## Continuums
 
-Octomode resonates other software practices based on pad-to-PDF workflows or collective infrastructure, including: 
+Octomode resonates other software practices based on pad-to-PDF workflows or collective infrastructure, including:
 
 * wiki-to-PDF http://titipi.org/wiki/index.php/Wiki-to-pdf by Martino Morandi/TITiPI
 * Living Glossary Enviroment http://tool.attempt.press/ by Camilo Garcia/Attempt
@@ -97,7 +97,7 @@ To install them, you can run:
 
 ### Note
 
-It's recommended to use firefox when working with octomode locally. Chrome or Chromium do not load external etherpads in iframes. 
+It's recommended to use Firefox when working with octomode locally. Chrome or Chromium do not load external etherpads in iframes.
 
 ## Use octomode on a server
 
