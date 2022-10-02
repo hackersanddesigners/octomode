@@ -6,4 +6,3 @@ setup:
 
 run:
 	@.venv/bin/python octomode.py
-
