@@ -73,7 +73,7 @@ Octomode resonates other software practices based on pad-to-PDF workflows or col
 * Etherdump https://gitlab.constantvzw.org/aa/etherdump by Michael Murtaugh/Constant
 * Pad2Print https://gitlab.com/Luuse/pad2print by Luuse
 
-## Use octomode locally
+## Install octomode
 
 You can clone this repository to run octomode on your own computer or server.
 
@@ -121,17 +121,17 @@ To install them, you can run:
 
 `make setup`
 
-### Note
-
-It's recommended to use Firefox when working with octomode locally. Chrome or Chromium do not load external etherpads in iframes.
-
-## Use octomode on a server
+### Other configurations on the server
 
 * Configure the webserver to listen to the port of the flask application, for example with a subdomain
 * Expand the current https certificate for a subdomain
 * Restart nginx (`sudo service reload nginx`)
-* To keep the flask application running in the background: add a new config to supervisor (`cp /etc/supervisor/conf.d/previousexample.conf new.conf`)
+* To keep the flask application running in the background: add a new config to supervisor (`cp /etc/supervisor/conf.d/previousexample.conf /etc/supervisor/conf.d/new.conf`)
 * Restart supervisor (`sudo service reload supervisor`)
+
+## Use octomode locally
+
+It's recommended to use Firefox when working with octomode locally. Chrome or Chromium do not load external etherpads in iframes.
 
 ## Snapshots
 
