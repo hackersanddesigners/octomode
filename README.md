@@ -83,20 +83,31 @@ You can clone this repository to run octomode on your own computer or server.
 
 `make setup` (sets up a virtual environment and install the requirements, you only need to do this once)
 
-Then you can configure your environment:
-
-- **OCTOMODE_PORTNUMBER**: optional, default: `5001`
-- **OCTOMODE_PAD_URL**: optional, default: `https://pad.vvvvvvaria.org/`
-- **OCTOMODE_PAD_API_URL**: optional, default: `https://pad.vvvvvvaria.org/api/1.2.15/`
-- **OCTOMODE_PAD_API_KEY**: required, **no default**
-
-You must provide a value for `OCTOMODE_PAD_API_KEY`.
+Then you can configure your environment.
 
 You can do this by passing the values on the command-line before running octomode:
 
 ```
 export OCTOMODE_PAD_API_KEY=...
 ```
+
+Or you save the configuration variables in a file called `config.py`:
+
+```
+class Config(object):
+	APPLICATION_ROOT = '/'
+	PORTNUMBER = 5001
+	PAD_URL = 'https://pad.vvvvvvaria.org/' # with a slash in the end!
+	PAD_API_URL = 'https://pad.vvvvvvaria.org/api/1.2.15/'
+	PAD_API_KEY = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+```
+
+- **OCTOMODE_PORTNUMBER**: optional, default: `5001`
+- **OCTOMODE_PAD_URL**: optional, default: `https://pad.vvvvvvaria.org/`
+- **OCTOMODE_PAD_API_URL**: optional, default: `https://pad.vvvvvvaria.org/api/1.2.15/`
+- **OCTOMODE_PAD_API_KEY**: required, **no default**
+
+(Note: You must provide a value for `OCTOMODE_PAD_API_KEY`.)
 
 `make run` (runs the Flask application)
 
