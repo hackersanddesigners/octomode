@@ -111,7 +111,7 @@ class Config(object):
 
 `make run` (runs the Flask application)
 
-Open the application at <http://localhost:5001>.
+Open the application at port `5001`, for example: <http://localhost:5001> or <http://111.111.111.111:5001>.
 
 ### Dependencies
 
@@ -120,6 +120,8 @@ Open the application at <http://localhost:5001>.
 To install them, you can run:
 
 `make setup`
+
+This creates a virtual environment at `.venv/` and installs all the dependencies here.
 
 ### Other configurations on the server
 
