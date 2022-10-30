@@ -83,18 +83,15 @@ You can clone this repository to run octomode on your own computer or server.
 
 `make setup` (sets up a virtual environment and install the requirements, you only need to do this once)
 
-Then you can configure your environment.
+`nano .env` 
 
-You can do this in two ways:
-
-* by editing the `config.env` file
-* by storing the configuration settings as *environment variables* before running octomode:
+Configure your environment, save the following configuration settings as to a file called `.env`:
 
 ```
-$ export OCTOMODE_PORTNUMBER=XXX
-$ export OCTOMODE_PAD_URL=XXX
-$ export OCTOMODE_PAD_API_URL=XXX
-$ export OCTOMODE_PAD_API_KEY=XXX
+OCTOMODE_PORTNUMBER=XXX
+OCTOMODE_PAD_URL=XXX
+OCTOMODE_PAD_API_URL=XXX
+OCTOMODE_PAD_API_KEY=XXX
 ```
 
 - **OCTOMODE_PORTNUMBER**: *optional*, default: `5001`
@@ -106,7 +103,7 @@ $ export OCTOMODE_PAD_API_KEY=XXX
 
 `make run` (runs the Flask application)
 
-Open the application at port `5001`, for example: <http://localhost:5001> or <http://111.111.111.111:5001>.
+Open the application at port `5001`, for example: <http://localhost:5001> or <http://mydomainname.ext:5001>.
 
 ### Dependencies
 

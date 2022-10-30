@@ -14,3 +14,4 @@ pypandoc==1.7.2
 typing-extensions==4.0.1
 urllib3==1.26.8
 zipp==3.7.0
+python-dotenv==0.21.0
