@@ -57,5 +57,23 @@ language: en
   
 -->
 
-# In octomode
+<section id="cover">
+# *in octomode* { #title }
 
+
+
+</section>
+
+<section id="main">
+Octomode is a collective editing space for PDF making, using Etherpad, Paged.js and Flask.
+
+Inspired by the non-centralised, tentacular cognition capabilities of the octopus, we imagined a space in which the artificial boundaries of writing and designing can be crossed; where writing, editing and designing can be done in one environment simultaneously, allowing the format to influence the matter and vice-versa.
+
+```
+Edit this text in the PAD view.
+Edit the styling in the STYLESHEET view. 
+Preview the page in the HTML view.
+Render it on pages in the PDF view.
+```
+
+</section>

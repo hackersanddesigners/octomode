@@ -2,13 +2,34 @@
 
 @page{
     size: A5;
-}
-@page:first{
-    background-color: pink;
+    margin: 10mm 20mm 25mm 20mm;
+
+    @bottom-center{
+        content: counter(page);
+        font-family: monospace;
+    }
 }
 body{
-    color: green;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #822b01;
+}
+
+/* ------------------------------------ cover */
+
+@page:first{
+    background-color: #f3c6ff;
+    color: #822b01;
 }
 section#cover{
-    page-break-after: always;
+    break-after: always;
+}
+section#cover h1#title{
+    font-size: 300%;
+}
+
+/* ------------------------------------ main */
+
+section#main pre{
+    color: magenta;
 }
