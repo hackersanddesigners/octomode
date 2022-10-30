@@ -4,6 +4,12 @@
 
 Octomode is a collective editing space for PDF making, using Etherpad, Paged.js and Flask.
 
+Inspired by the non-centralised, tentacular cognition capabilities of the octopus, we imagined a space in which the artificial boundaries of writing and designing can be crossed; where writing, editing and designing can be done in one environment simultaneously, allowing the format to influence the matter and vice-versa.
+
+While operating *in octomode*, we write/design collectively using an online real-time text editor called Etherpad. Etherpad is a free and open source tool that uses synchronization algorithms to merge our textual/design changes together. We use the word "pad" to refer to one single Etherpad document. Each change that is made on a pad is called a "changeset", which holds information about each character that is added and deleted, or each word that is turned into bold or italic. The changesets follow us while we write and think together, taking care of a kind of collectivity where we work towards *one* outcome together.
+
+While operating *in octomode* we work collectively in the sense of: sharing the same environment, blurring boundaries between roles and merging authorship, to become one tentacular entity. 
+
 ## How to use Octomode?
 
 If you want to work collectively on making a PDF, you can use octomode. There is an instance installed here: <https://octomode.vvvvvvaria.org/>. You can write any name of in the input field, this will create a new octomode environment.
