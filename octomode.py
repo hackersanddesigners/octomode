@@ -177,5 +177,6 @@ def pagedjs(name):
 # //////////////////
 
 if __name__ == '__main__':
-    APP.debug=True
+    APP.debug = True
+    APP.env = "development"
     APP.run(host="0.0.0.0", port=APP.config["PORTNUMBER"], threaded=True)
