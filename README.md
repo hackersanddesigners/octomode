@@ -85,19 +85,22 @@ You can clone this repository to run octomode on your own computer or server.
 
 Then you can configure your environment.
 
-You can do this by passing the values on the command-line before running octomode:
+You can do this in two ways:
+
+* by editing the `config.env` file
+* by storing the configuration settings as *environment variables* before running octomode:
 
 ```
-export OCTOMODE_PORTNUMBER=XXX
-export OCTOMODE_PAD_URL=XXX
-export OCTOMODE_PAD_API_URL=XXX
-export OCTOMODE_PAD_API_KEY=XXX
+$ export OCTOMODE_PORTNUMBER=XXX
+$ export OCTOMODE_PAD_URL=XXX
+$ export OCTOMODE_PAD_API_URL=XXX
+$ export OCTOMODE_PAD_API_KEY=XXX
 ```
 
-- **OCTOMODE_PORTNUMBER**: optional, default: `5001`
-- **OCTOMODE_PAD_URL**: optional, default: `https://pad.vvvvvvaria.org/`
-- **OCTOMODE_PAD_API_URL**: optional, default: `https://pad.vvvvvvaria.org/api/1.2.15/`
-- **OCTOMODE_PAD_API_KEY**: required, **no default**
+- **OCTOMODE_PORTNUMBER**: *optional*, default: `5001`
+- **OCTOMODE_PAD_URL**: *optional*, default: `https://pad.vvvvvvaria.org/`
+- **OCTOMODE_PAD_API_URL**: *optional*, default: `https://pad.vvvvvvaria.org/api/1.2.15/`
+- **OCTOMODE_PAD_API_KEY**: *required*, **no default**
 
 (Note: You must provide a value for `OCTOMODE_PAD_API_KEY`.)
 
