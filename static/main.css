@@ -1,3 +1,5 @@
+@charset "utf-8"; 
+
 body{
 	min-width: 900px;
 }
@@ -29,9 +31,43 @@ div#nav{
 		margin: 0.5em 15px;
 		float: right;
 	}
+	div#nav span.info{
+		font-size: 16px;
+		line-height: 0;
+		vertical-align: middle;
+		cursor: pointer;
+	}
+	div#nav span.info:hover{
+		opacity: 0.75;
+	}
+	div#nav div.hidden{
+		position: absolute;
+		right: 1.5em;
+		margin-top: 8px;
+	}
 	div#nav input{
 		min-width: 300px;
 	}
+	/* click logic (CSS only) */ 
+	span#click_md {
+		cursor: pointer;
+	}
+	div#show_md{
+		display: none;
+	}
+	span#click_md:focus + div#show_md{
+		display: block;
+	}
+	span#click_css {
+		cursor: pointer;
+	}
+	div#show_css{
+		display: none;
+	}
+	span#click_css:focus + div#show_css{
+		display: block;
+	}
+
 /* iframe rules */
 iframe{
 	width: 100%;
@@ -47,21 +83,6 @@ div#wrapper{
 	height: calc(100vh - 50px - 25px);
 }
 
-/*div#logger-wrapper{
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	z-index: -1;
-	width: 100%;
-	height: 100%;
-	overflow-y: auto;
-	padding: 0 1em;
-	background-color: lightyellow;
-	display: flex;
-	flex-direction: column-reverse;
-	white-space: pre;
-}*/
-
 /* start page */
 body.start-page *{
 	font-family: serif;
@@ -70,7 +91,6 @@ body.start-page *{
 }
 
 /* Z-INDEX */
-
 div#wrapper,
 div.pagedjs_pages{
 	z-index: 1;

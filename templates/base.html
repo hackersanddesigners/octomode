@@ -24,11 +24,13 @@ window.addEventListener('load', function () {
     <h1>{{ name }} <a href="/"><em class="octomode">in octomode</em></a></h1>
     <div id="buttons">
 
-      <a href="/{{ name }}/pad"><button>pad</button></a>:
-      <input type="text" name="pad" value="{{ pad_url }}/{{ name }}.md">
+      <a href="/{{ name }}/pad"><button>pad</button></a> 
+      <span id="click_md" class="info" tabindex="1">🌐</span>
+      <div id="show_md" class="hidden"><input type="text" name="pad" value="{{ pad_url }}/{{ name }}.md"></div>
 
-      <a href="/{{ name }}/stylesheet"><button>stylesheet</button></a>:
-      <input type="text" name="pad" value="{{ pad_url }}/{{ name }}.css">
+      <a href="/{{ name }}/stylesheet"><button>stylesheet</button></a> 
+      <span id="click_css" class="info" tabindex="1">🌐</span>
+      <div id="show_css" class="hidden"><input type="text" name="pad" value="{{ pad_url }}/{{ name }}.css"></div>
 
       <a href="/{{ name }}/html"><button>html</button></a>
 
