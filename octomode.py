@@ -23,7 +23,7 @@ class Config(object):
 APP = Flask(__name__)
 APP.config.from_object(Config)
 
-if APP.config.get('PAD_API_KEY', '') == '':
+if APP.config.get('OCTOMODE_PAD_API_KEY', '') == '':
     print("error: you must provide a value for OCTOMODE_PAD_API_KEY")
     print("error: e.g. export OCTOMODE_PAD_API_KEY=...")
     exit(1)
