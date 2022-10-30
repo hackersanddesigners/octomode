@@ -108,7 +108,7 @@ def index():
         exts = ['.md', '.css']
         for ext in exts:
             create_pad_on_first_run(name, ext)
-        return redirect(f"/{ name }/pad")
+        return redirect(f"/{ name }/pad/")
     else:
         return render_template('start.html', pad_url=APP.config['PAD_URL'])
 
@@ -116,22 +116,22 @@ def index():
 def main(name):
     return redirect(f"/{ name }/pad")
 
-@APP.route('/<name>/pad')
+@APP.route('/<name>/pad/')
 def pad(name):
     url = f"{ APP.config['PAD_URL'] }/{ name }.md"
     return render_template('iframe.html', url=url, name=name.strip(), pad_url=APP.config['PAD_URL'])
 
-@APP.route('/<name>/stylesheet')
+@APP.route('/<name>/stylesheet/')
 def stylesheet(name):
     url = f"{ APP.config['PAD_URL'] }/{ name }.css"
     return render_template('iframe.html', url=url, name=name.strip(), pad_url=APP.config['PAD_URL'])
 
-@APP.route('/<name>/html')
+@APP.route('/<name>/html/')
 def html(name):
     url = f"/{ name }/preview.html"
     return render_template('iframe.html', url=url, name=name.strip(), pad_url=APP.config['PAD_URL'])
 
-@APP.route('/<name>/pdf')
+@APP.route('/<name>/pdf/')
 def pdf(name):
     url = f"/{name}/pagedjs.html"
     return render_template('pdf.html', url=url, name=name.strip(), pad_url=APP.config['PAD_URL'])
