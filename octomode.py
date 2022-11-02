@@ -112,7 +112,7 @@ def index():
     else:
         return render_template('start.html', pad_url=APP.config['PAD_URL'])
 
-@APP.route('/<name>')
+@APP.route('/<name>/')
 def main(name):
     return redirect(f"/{ name }/pad")
 
