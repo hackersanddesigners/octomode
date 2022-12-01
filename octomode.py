@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, url_for
 from urllib.request import urlopen
 from urllib.parse import urlencode
 
@@ -108,13 +108,13 @@ def index():
         exts = ['.md', '.css']
         for ext in exts:
             create_pad_on_first_run(name, ext)
-        return redirect(f"/{ name }/pad/")
+        return redirect(url_for("pad", name=name))
     else:
         return render_template('start.html', pad_url=APP.config['PAD_URL'])
 
 @APP.route('/<name>/')
 def main(name):
-    return redirect(f"/{ name }/pad")
+    return redirect(url_for("pad", name=name))
 
 @APP.route('/<name>/pad/')
 def pad(name):

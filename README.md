@@ -81,21 +81,37 @@ You can clone this repository to run octomode on your own computer or server.
 
 `git clone https://git.vvvvvvaria.org/varia/octomode.git`
 
-`cd octomode`
+Install the dependencies.
 
-`make setup` (sets up a virtual environment and install the requirements, you only need to do this once)
+All the `python` dependencies are listed in `requirements.txt`
+
+To install them, you can run:
+
+`make setup`
+
+This creates a virtual environment at `.venv/` and installs all the dependencies here.
+
+Next to this, you also need to install `pandoc`.
+
+`sudo apt install pandoc`
+
+Now we need to configure *octomode*:
+
+`cd octomode`
 
 `nano .env` 
 
 Configure your environment, save the following configuration settings as to a file called `.env`:
 
 ```
+OCTOMODE_APPLICATION_ROOT=XXX
 OCTOMODE_PORTNUMBER=XXX
 OCTOMODE_PAD_URL=XXX
 OCTOMODE_PAD_API_URL=XXX
 OCTOMODE_PAD_API_KEY=XXX
 ```
 
+- **OCTOMODE_APPLICATION_ROOT**: *optional*, default: `/`
 - **OCTOMODE_PORTNUMBER**: *optional*, default: `5001`
 - **OCTOMODE_PAD_URL**: *optional*, default: `https://pad.vvvvvvaria.org/`
 - **OCTOMODE_PAD_API_URL**: *optional*, default: `https://pad.vvvvvvaria.org/api/1.2.15/`
@@ -105,25 +121,24 @@ OCTOMODE_PAD_API_KEY=XXX
 
 `make run` (runs the Flask application)
 
-Open the application at port `5001`, for example: <http://localhost:5001> or <http://mydomainname.ext:5001>.
+Open the application at port `5001`, for example: <http://localhost:5001> or <https://mydomainname.ext:5001>.
+
+## Install octomode with an URL prefix
+
+If you want to install octomode with an URL prefix, like <https://mydomainname.ext/octomode/>, then you can use the gunicorn WSGI.
+
+If you have ran the `make setup` command already, then `gunicorn` is already installed.
+
+Configure your application root URL in your `.env` file.
+
+You can simply run *octomode* now with the following command to run it with `gunicorn` (and not the built-in Flask dev server):
+
+`make action`
 
 ### Dependencies
 
-`python` dependencies are listed in `requirements.txt`
-
-To install them, you can run:
-
-`make setup`
-
-This creates a virtual environment at `.venv/` and installs all the dependencies here.
-
-### Other configurations on the server
-
-* Configure the webserver to listen to the port of the flask application, for example with a subdomain
-* Expand the current https certificate for a subdomain
-* Restart nginx (`sudo service reload nginx`)
-* To keep the flask application running in the background: add a new config to supervisor (`cp /etc/supervisor/conf.d/previousexample.conf /etc/supervisor/conf.d/new.conf`)
-* Restart supervisor (`sudo service reload supervisor`)
+* pandoc
+* python dependencies, see: `requirements.txt`
 
 ## Use octomode locally
 

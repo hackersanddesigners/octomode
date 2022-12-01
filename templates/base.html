@@ -21,20 +21,20 @@ window.addEventListener('load', function () {
   nav.id = 'nav';
 
   nav.innerHTML = `
-    <h1>{{ name }} <a href="/"><em class="octomode">in octomode</em></a></h1>
+    <h1>{{ name }} <a href="{{ url_for('index') }}"><em class="octomode">in octomode</em></a></h1>
     <div id="buttons">
 
-      <a href="/{{ name }}/pad"><button>pad</button></a> 
+      <a href="{{ url_for('pad', name=name) }}"><button>pad</button></a> 
       <span id="click_md" class="info" tabindex="1">🌐</span>
       <div id="show_md" class="hidden"><input type="text" name="pad" value="{{ pad_url }}/{{ name }}.md"></div>
 
-      <a href="/{{ name }}/stylesheet"><button>stylesheet</button></a> 
+      <a href="{{ url_for('stylesheet', name=name) }}"><button>stylesheet</button></a> 
       <span id="click_css" class="info" tabindex="1">🌐</span>
       <div id="show_css" class="hidden"><input type="text" name="pad" value="{{ pad_url }}/{{ name }}.css"></div>
 
-      <a href="/{{ name }}/html"><button>html</button></a>
+      <a href="{{ url_for('html', name=name) }}"><button>html</button></a>
 
-      <a href="/{{ name }}/pdf"><button>pdf</button></a>
+      <a href="{{ url_for('pdf', name=name) }}"><button>pdf</button></a>
     </div>`;
 
   document.body.insertBefore(nav, document.body.firstChild);
