@@ -128,12 +128,26 @@ def stylesheet(name):
 
 @APP.route('/<name>/html/')
 def html(name):
-    url = f"/{ name }/preview.html"
+    # only here we need application root to make all the URLs work.....
+    if APP.config['APPLICATION_ROOT'] == '/':
+        app_root = ''
+    elif APP.config['APPLICATION_ROOT'].endswith('/'):
+        app_root = APP.config['APPLICATION_ROOT'][:-1]
+    else:
+        app_root = APP.config['APPLICATION_ROOT']
+    url = f"{ app_root }/{ name }/preview.html"
     return render_template('iframe.html', url=url, name=name.strip(), pad_url=APP.config['PAD_URL'])
 
 @APP.route('/<name>/pdf/')
 def pdf(name):
-    url = f"/{name}/pagedjs.html"
+    # only here we need application root to make all the URLs work.....
+    if APP.config['APPLICATION_ROOT'] == '/':
+        app_root = ''
+    elif APP.config['APPLICATION_ROOT'].endswith('/'):
+        app_root = APP.config['APPLICATION_ROOT'][:-1]
+    else:
+        app_root = APP.config['APPLICATION_ROOT']
+    url = f"{ app_root }/{name}/pagedjs.html"
     return render_template('pdf.html', url=url, name=name.strip(), pad_url=APP.config['PAD_URL'])
 
 # //////////////////

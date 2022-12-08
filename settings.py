@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Bind them to Python variables
+APPLICATION_ROOT = os.environ.get('OCTOMODE_APPLICATION_ROOT', '/')
 PORTNUMBER = int(os.environ.get('OCTOMODE_PORTNUMBER', 5001))
 PAD_URL = os.environ.get('OCTOMODE_PAD_URL', 'https://pad.vvvvvvaria.org')
 PAD_API_URL = os.environ.get('OCTOMODE_PAD_API_URL', 'https://pad.vvvvvvaria.org/api/1.2.15')
