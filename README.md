@@ -1,4 +1,4 @@
-# Octomode
+# octomode
 
 > *work-in-progress*
 
@@ -6,7 +6,7 @@ Octomode is a collective editing space for PDF making, using Etherpad, Paged.js 
 
 Inspired by the non-centralised, tentacular cognition capabilities of the octopus, we imagined a space in which the artificial boundaries of writing and designing can be crossed; where writing, editing and designing can be done in one environment simultaneously, allowing the format to influence the matter and vice-versa.
 
-## How to use Octomode?
+## How to use octomode?
 
 If you want to work collectively on making a PDF, you can use octomode. There is an instance installed here: <https://octomode.vvvvvvaria.org/>. You can write any name of in the input field, this will create a new octomode environment.
 
