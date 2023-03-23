@@ -25,7 +25,7 @@ When creating a new environment, a few things happen:
 
 In case a pad was already made, you can copy the templates below and paste them at the top of your pads.
 
-The PDFs are rendered using [Paged.js](https://pagedjs.org/), a free and open source JavaScript library "that paginates content in the browser to create PDF output from any HTML content. This means you can design works for print (eg. books) using HTML and CSS!" The project is maintained by the [Coko Foundation](https://coko.foundation/). Paged.js adds features to the CSS3 standards, expanding the possibilities to make lay outs for specific sections, place content in the margins of pages, and render indexes (amonst other things). The documentation is very ufesul and can be found here: <https://pagedjs.org/documentation/>.
+The PDFs are rendered using [Paged.js](https://pagedjs.org/), a free and open source JavaScript library "that paginates content in the browser to create PDF output from any HTML content. This means you can design works for print (eg. books) using HTML and CSS!" The project is maintained by the [Coko Foundation](https://coko.foundation/). Paged.js adds not (yet) implemented CSS rules to the ones that browsers implemented already, expanding the possibilities to make lay outs for specific sections, place content in the margins of pages, and render indexes (amongst other things). The Paged.js documentation is very helpful and can be found here: <https://pagedjs.org/documentation/>.
 
 ### Octomode Markdown template
 
