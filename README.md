@@ -68,10 +68,12 @@ When working with multiple people on one PDF it is recommended to use the same b
 
 Octomode resonates other software practices based on pad-to-PDF workflows or collective infrastructure, including:
 
-* Ethertoff http://osp.kitchen/tools/ethertoff/ by OSP
-* Etherbox https://networksofonesown.constantvzw.org/ by Michael Murtaugh/Constant
-* Etherdump https://gitlab.constantvzw.org/aa/etherdump by Michael Murtaugh/Constant
-* Pad2Print https://gitlab.com/Luuse/pad2print by Luuse
+* ethertoff http://osp.kitchen/tools/ethertoff/ by OSP
+* ether2html http://osp.kitchen/tools/ether2html/ by OSP
+* etherpash https://freeze.sh/_/2015/conversations/#mdsh by Freeze/Christoph Haag
+* etherbox https://networksofonesown.constantvzw.org/ by Michael Murtaugh/Constant
+* etherdump https://gitlab.constantvzw.org/aa/etherdump by Michael Murtaugh/Constant
+* pad2print https://gitlab.com/Luuse/pad2print by Luuse
 
 ## Install octomode
 
