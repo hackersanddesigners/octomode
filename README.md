@@ -1,3 +1,5 @@
+Forked from https://git.vvvvvvaria.org/varia/octomode.git
+
 # octomode
 
 > *work-in-progress*
